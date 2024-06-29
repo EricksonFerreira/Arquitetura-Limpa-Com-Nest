@@ -4,7 +4,7 @@ Este é o README para o projeto "Nest Clean Arch" do curso da Udemy.
 
 ## Descrição
 
-O projeto "Nest Clean Arch" é um exemplo prático de como implementar uma arquitetura limpa utilizando o framework Nest.js. A arquitetura limpa é uma abordagem que visa separar as respo,,nsabilidades do código em camadas bem definidas, facilitando a manutenção, testabilidade e escalabilidade do projeto.
+O projeto "Nest Clean Arch" é um exemplo prático de como implementar uma arquitetura limpa utilizando o framework Nest.js. A arquitetura limpa é uma abordagem que visa separar as responsabilidades do código em camadas bem definidas, facilitando a manutenção, testabilidade e escalabilidade do projeto.
 
 ## Funcionalidades
 
