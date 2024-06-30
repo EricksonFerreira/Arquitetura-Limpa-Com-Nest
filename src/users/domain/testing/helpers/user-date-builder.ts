@@ -15,5 +15,4 @@ export function UserDataBuilder(props: Props): UserProps {
     password: props.password ?? faker.internet.password(),
     createdAt: props.createdAt ?? new Date(),
   };
-
 }
