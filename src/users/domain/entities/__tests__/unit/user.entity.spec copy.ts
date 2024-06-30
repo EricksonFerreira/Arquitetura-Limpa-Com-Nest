@@ -1,4 +1,4 @@
-import {faker} from '@faker-js/faker';
+import { faker } from '@faker-js/faker';
 import { UserEntity } from '../../user.entity';
 
 describe('User entity unit tests', () => {
