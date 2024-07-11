@@ -55,7 +55,7 @@ export class UserEntity extends Entity<UserProps> {
     // validator.validate(props);
     const isValid = validator.validate(props);
     if (!isValid) {
-      return new EntityValidationError(validator.errors);
+      throw new EntityValidationError(validator.errors);
     }
   }
 }
