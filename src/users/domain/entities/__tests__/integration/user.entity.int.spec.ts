@@ -95,5 +95,19 @@ describe('UserEntity integratios tests', () => {
       };
       expect(() => new UserEntity(props)).toThrowError(EntityValidationError);
     });
+
+    it('Should a valid user', () => {
+      expect.assertions(0);
+      const props: UserProps = {
+        ...UserDataBuilder({}),
+      };
+      const sut = new UserEntity(props);
+
+      new UserEntity(props);
+      expect(sut.props.name).toEqual(props.name);
+      expect(sut.props.email).toEqual(props.email);
+      expect(sut.props.password).toEqual(props.password);
+      expect(sut.props.createdAt).toBeInstanceOf(Date);
+    });
   });
 });
