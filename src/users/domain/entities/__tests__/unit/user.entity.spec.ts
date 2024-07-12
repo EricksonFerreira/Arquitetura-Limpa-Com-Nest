@@ -7,7 +7,7 @@ describe('User entity unit tests', () => {
   let sut: UserEntity;
 
   beforeEach(() => {
-    UserEntity.validate(props);
+    UserEntity.validate = jest.fn();
     props = UserDataBuilder({});
     sut = new UserEntity(props);
   });
@@ -62,6 +62,8 @@ describe('User entity unit tests', () => {
   });
 
   it('Should update the passowrd field', () => {
+    UserEntity.validate(props);
+
     expect(UserEntity.validate).toHaveBeenCalled();
     sut.updatePassword('other password');
     expect(sut.props.password).toEqual('other password');
