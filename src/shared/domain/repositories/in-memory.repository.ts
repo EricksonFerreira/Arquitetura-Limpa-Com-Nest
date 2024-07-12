@@ -1,4 +1,3 @@
-import { th } from '@faker-js/faker';
 import { Entity } from '../entities/entity';
 import { RepositoryInterface } from './repository-contracts';
 import { NotFoundError } from '../erros/not-found-error';
@@ -29,7 +28,6 @@ export abstract class InMemoryRepository<E extends Entity>
     await this._get(id);
     const index = this.items.findIndex((item) => item.id === id);
     this.items.splice(index, 1);
-
   }
 
   protected async _get(id: string): Promise<E | null> {
