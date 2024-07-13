@@ -61,9 +61,13 @@ export abstract class InMemorySeachableRepository<E extends Entity>
     });
   }
 
-  protected async applyPagination(
+  protected async applyPaginate(
     items: E[],
     page: SearchParams['page'],
     perPage: SearchParams['perPage'],
-  ): Promise<E[]> {}
+  ): Promise<E[]> {
+    const start = (page - 1) * perPage;
+    const end = start + perPage;
+    return items.slice(start, end);
+  }
 }
