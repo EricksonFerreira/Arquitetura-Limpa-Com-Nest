@@ -12,17 +12,17 @@ export type SearchProps<Filter = string> = {
 
 export class SearchParams {
   protected _page: number;
-  protected _perPage: number;
+  protected _perPage: number = 15;
   protected _sort: string | null;
   protected _sortDir: SortDirection | null;
   protected _filter: string | null;
 
-  constructor(props: SearchProps) {
-    this._page = props.page || 1;
-    this._perPage = props.perPage || 15;
-    this._sort = props.sort || null;
-    this._sortDir = props.sortDir || null;
-    this._filter = props.filter || null;
+  constructor(props: SearchProps = {}) {
+    this.page = props.page || 1;
+    this.perPage = props.perPage || 15;
+    this.sort = props.sort;
+    this.sortDir = props.sortDir;
+    this.filter = props.filter;
   }
 
   get page(): number {
@@ -30,7 +30,11 @@ export class SearchParams {
   }
 
   set page(value: number) {
-    this._page = value;
+    let _page = +value;
+    if (Number.isNaN(_page) || _page < 1 || parseInt(String(_page)) !== _page) {
+      _page = 1;
+    }
+    this._page = _page;
   }
 
   get perPage(): number {
@@ -38,7 +42,16 @@ export class SearchParams {
   }
 
   private set perPage(value: number) {
-    this._perPage = value;
+    let _perPage = value === (true as any) ? this._perPage : +value;
+    if (
+      Number.isNaN(_perPage) ||
+      _perPage < 1 ||
+      parseInt(_perPage as any) !== _perPage
+    ) {
+      _perPage = this._perPage;
+    }
+
+    this._perPage = _perPage;
   }
 
   get sort(): string | null {
@@ -46,7 +59,8 @@ export class SearchParams {
   }
 
   private set sort(value: string | null) {
-    this._sort = value;
+    this._sort =
+      value === null || value === undefined || value === '' ? null : `${value}`;
   }
 
   get sortDir(): SortDirection | null {
@@ -54,7 +68,13 @@ export class SearchParams {
   }
 
   private set sortDir(value: SortDirection | null) {
-    this._sortDir = value;
+    if (!this.sort) {
+      this._sortDir = null;
+      return;
+    }
+    const dir = `${value}`.toLowerCase();
+    this._sortDir =
+      dir !== 'asc' && dir !== 'desc' ? 'desc' : (dir as SortDirection);
   }
 
   get filter(): string | null {
@@ -62,7 +82,8 @@ export class SearchParams {
   }
 
   private set filter(value: string | null) {
-    this._filter = value;
+    this._filter =
+      value === null || value === undefined || value === '' ? null : `${value}`;
   }
 }
 
