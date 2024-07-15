@@ -347,7 +347,6 @@ describe('InMemoryRepository unit tests', () => {
           filter: 'TEST',
         }),
       );
-
     });
   });
 });
