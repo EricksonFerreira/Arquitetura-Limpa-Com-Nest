@@ -1,4 +1,4 @@
-import { HashProvider } from './../../../../shared/application/provider/hash-provider';
+import { HashProvider } from '@/shared/application/providers/hash-provider';
 import { hash, compare } from 'bcryptjs';
 
 export class BcryptjsHashProvider implements HashProvider {
