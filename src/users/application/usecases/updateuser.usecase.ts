@@ -3,9 +3,10 @@ import { BadRequestError } from '../../../shared/application/errors/bad-request-
 import { UserOutput, UserOutputMapper } from '../dtos/user-output';
 import { UseCase as DefaultUseCase } from '@/shared/application/usecases/use-case';
 
-export namespace GetUserUseCase {
+export namespace UpdateUserUseCase {
   export type Input = {
     id: string;
+    name: string;
   };
 
   export type Output = UserOutput;
@@ -14,13 +15,14 @@ export namespace GetUserUseCase {
     constructor(private userRepository: UserRepository.Repository) {}
 
     async execute(input: Input): Promise<Output> {
-      const { id } = input;
-
-      if (!id) {
-        throw new BadRequestError('Input data not provided');
+      if (!input.name) {
+        throw new BadRequestError('Name not provided');
       }
 
-      const entity = await this.userRepository.findById(id);
+      const entity = await this.userRepository.findById(input.id);
+      entity.update(input.name);
+
+      await this.userRepository.update(entity);
 
       return UserOutputMapper.toOutput(entity);
     }
